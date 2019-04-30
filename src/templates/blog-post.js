@@ -8,19 +8,14 @@ import SEO from '../components/SEO';
 import { formatReadingTime } from '../utils/helpers';
 import { rhythm, scale } from '../utils/typography';
 
-const GITHUB_USERNAME = 'hantq';
-const GITHUB_REPO_NAME = 'website';
 const WEBSITE_TITLE = 'Overreacted';
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark;
     const siteTitle = get(this.props, 'data.site.siteMetadata.title');
-    const { previous, next, slug } = this.props.pageContext;
-    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${slug.replace(
-      /\//g,
-      ''
-    )}.md`;
+    const { previous, next } = this.props.pageContext;
+
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title={post.frontmatter.title} description={post.frontmatter.spoiler} slug={post.fields.slug} />
@@ -37,16 +32,6 @@ class BlogPostTemplate extends React.Component {
           {` • ${formatReadingTime(post.timeToRead)}`}
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <p>
-          <a href={editUrl} target="_blank" rel="noopener noreferrer">
-            Edit on GitHub
-          </a>
-        </p>
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
         <h3
           style={{
             fontFamily: 'Montserrat, sans-serif',
